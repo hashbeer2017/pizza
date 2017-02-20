@@ -86,8 +86,7 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	@Override
 	public T get(int row, int col) {
-		ArrayList<T> a = arr.get(row);
-		return a.get(col);
+		return arr.get(row).get(col);
 	}
 
 	public static void main(String[] args) {
