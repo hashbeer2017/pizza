@@ -17,7 +17,6 @@ public class MyMatrix<T> implements Matrix<T> {
 		try {
 			File file = new File(path);
 			BufferedReader br = new BufferedReader(new FileReader(file));
-			StringBuffer sb = new StringBuffer();
 			String lines = br.readLine();
 			this.r = Character.getNumericValue(lines.charAt(0));
 			this.c = Character.getNumericValue(lines.charAt(2));
@@ -26,10 +25,9 @@ public class MyMatrix<T> implements Matrix<T> {
 
 			while (br.ready() && i < arr.size()) {
 				String line = br.readLine();
-				ArrayList<T> temp = new ArrayList<>();
-				String t = sb.append(line).toString();
-				for (int g = 0; g < t.length(); g++)
-					temp.add(t.charAt(g), null);
+				ArrayList<T> temp = new ArrayList<T>();
+				for (int g = 0; g < line.length(); g++)
+					temp.add(line.charAt(g), null);
 				arr.add(temp);
 				i++;
 				temp = null;
@@ -77,7 +75,7 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	public void print() {
 		for (ArrayList<T> a : arr) {
-			System.out.println(a);
+			System.out.println(a.toString());
 		}
 	}
 
@@ -89,7 +87,6 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	public static void main(String[] args) {
 		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
-		m.print();
 	}
 
 }
