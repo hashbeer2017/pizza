@@ -9,8 +9,8 @@ import java.util.Iterator;
 
 public class MyMatrix<T> implements Matrix<T> {
 
-	ArrayList<ArrayList<T>> arr = new ArrayList<ArrayList<T>>();
-	int r, c, h, l;
+	private ArrayList<ArrayList<T>> arr = new ArrayList<ArrayList<T>>();
+	private int r, c, h, l;
 
 	public MyMatrix(String path) {
 		int i = 0;
