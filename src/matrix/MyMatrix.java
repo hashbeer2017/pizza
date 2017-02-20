@@ -10,28 +10,49 @@ import java.util.Iterator;
 public class MyMatrix<T> implements Matrix<T> {
 
 	ArrayList<ArrayList<T>> arr = new ArrayList<ArrayList<T>>();
-	Cell c = null;
+	int r, c, h, l;
 
 	public MyMatrix(String path) {
-		int r, c, h, l = 0;
-		ArrayList<T> mat = new ArrayList<>();
+		int i = 0;
 		try {
 			File file = new File(path);
 			BufferedReader br = new BufferedReader(new FileReader(file));
-			StringBuffer sb = new StringBuffer();
-			int cont = 0;
 			String lines = br.readLine();
-			
-			while (br.ready()) {
-				String line = br.readLine();
+			this.r = Character.getNumericValue(lines.charAt(0));
+			this.c = Character.getNumericValue(lines.charAt(2));
+			this.l = Character.getNumericValue(lines.charAt(4));
+			this.h = Character.getNumericValue(lines.charAt(6));
 
+			while (br.ready() && i < getRows()) {
+				String line = br.readLine();
+				ArrayList<T> temp = new ArrayList<T>();
+				for (int g = 0; g < line.length(); g++)
+					temp.add((T) (line.charAt(g) + ""));
+				arr.add(temp);
+				i++;
+				temp = null;
 			}
 			br.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
+	public int getCols() {
+		return this.c;
+	}
+
+	public int getRows() {
+		return this.r;
+	}
+
+	public int getL() {
+		return this.l;
+	}
+
+	public int getH() {
+		return this.h;
 	}
 
 	@Override
@@ -40,7 +61,7 @@ public class MyMatrix<T> implements Matrix<T> {
 		return null;
 	}
 
-	private class Cell<T> {
+	private static class Cell<T> {
 
 		T object;
 		// boolean taken;
@@ -52,10 +73,33 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	}
 
+	public String getMatrix() {
+		String res = "";
+		for (int i = 0; i < arr.size(); i++) {
+			for (int j = 0; j < arr.get(i).size(); j++) {
+				res += arr.get(i).get(j);
+			}
+			res += "\n";
+		}
+		return res;
+	}
+
 	@Override
 	public T get(int row, int col) {
 		ArrayList<T> a = arr.get(row);
 		return a.get(col);
+	}
+
+	public static void main(String[] args) {
+		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
+		System.out.println("Numero di righe: " + m.getRows());
+		System.out.println("Numero di colonne: " + m.getCols());
+		System.out.println("L: " + m.getL());
+		System.out.println("H: " + m.getH());
+		System.out.println();
+		System.out.println("Matrice: ");
+		System.out.println();
+		System.out.println(m.getMatrix());
 	}
 
 }
