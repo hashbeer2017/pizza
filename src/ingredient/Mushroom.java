@@ -1,5 +1,5 @@
 package ingredient;
 
-public class Mushroom {
+public class Mushroom extends Ingredient {
 
 }

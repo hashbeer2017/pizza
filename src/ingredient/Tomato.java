@@ -1,5 +1,5 @@
 package ingredient;
 
-public class Tomato {
+public class Tomato extends Ingredient{
 
 }
