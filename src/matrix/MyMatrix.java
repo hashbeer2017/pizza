@@ -84,16 +84,6 @@ public class MyMatrix<T> implements Matrix<T> {
 		return res;
 	}
 
-	/**
-	 * for row in board: line = "" for j in row: line += str(j) + " " print line
-	 */
-
-	/**
-	 * String result = ""; for(int i = 0; i < myBoard.size(); i++){ for(int j =
-	 * 0; j < myBoard.get(i).size(); j++){ result += myBoard.get(i).get(j); } //
-	 * System.out.println(); result += "\n"; } return result;
-	 */
-
 	@Override
 	public T get(int row, int col) {
 		ArrayList<T> a = arr.get(row);
