@@ -23,11 +23,11 @@ public class MyMatrix<T> implements Matrix<T> {
 			this.l = Character.getNumericValue(lines.charAt(4));
 			this.h = Character.getNumericValue(lines.charAt(6));
 
-			while (br.ready() && i < arr.size()) {
+			while (br.ready() && i < getRows()) {
 				String line = br.readLine();
 				ArrayList<T> temp = new ArrayList<T>();
 				for (int g = 0; g < line.length(); g++)
-					temp.add(line.charAt(g), null);
+					temp.add((T) (line.charAt(g) + ""));
 				arr.add(temp);
 				i++;
 				temp = null;
@@ -73,13 +73,26 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	}
 
-	public void print() {
-		for (int i = 0; i < getRows(); i++) {
-			for (int j = 0; j < getCols(); j++) {
-				System.out.println(arr.get(i).get(j));
+	public String print() {
+		String res = "";
+		for (int i = 0; i < arr.size(); i++) {
+			for (int j = 0; j < arr.get(i).size(); j++) {
+				res += arr.get(i).get(j);
 			}
+			res += "\n";
 		}
+		return res;
 	}
+
+	/**
+	 * for row in board: line = "" for j in row: line += str(j) + " " print line
+	 */
+
+	/**
+	 * String result = ""; for(int i = 0; i < myBoard.size(); i++){ for(int j =
+	 * 0; j < myBoard.get(i).size(); j++){ result += myBoard.get(i).get(j); } //
+	 * System.out.println(); result += "\n"; } return result;
+	 */
 
 	@Override
 	public T get(int row, int col) {
@@ -89,6 +102,7 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	public static void main(String[] args) {
 		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
+		System.out.println(m.print());
 	}
 
 }
