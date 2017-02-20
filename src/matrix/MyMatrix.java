@@ -74,8 +74,10 @@ public class MyMatrix<T> implements Matrix<T> {
 	}
 
 	public void print() {
-		for (ArrayList<T> a : arr) {
-			System.out.println(a.toString());
+		for (int i = 0; i < getRows(); i++) {
+			for (int j = 0; j < getCols(); j++) {
+				System.out.println(arr.get(i).get(j));
+			}
 		}
 	}
 
