@@ -92,6 +92,13 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	public static void main(String[] args) {
 		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
+		System.out.println("Numero di righe: " + m.getRows());
+		System.out.println("Numero di colonne: " + m.getCols());
+		System.out.println("L: " + m.getL());
+		System.out.println("H: " + m.getH());
+		System.out.println();
+		System.out.println("Matrice: ");
+		System.out.println();
 		System.out.println(m.getMatrix());
 	}
 
