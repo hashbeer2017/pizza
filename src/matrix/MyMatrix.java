@@ -27,11 +27,10 @@ public class MyMatrix<T> implements Matrix<T> {
 			while (br.ready() && i < arr.size()) {
 				String line = br.readLine();
 				ArrayList<T> temp = new ArrayList<>();
-				for (int g = 1; g < line.length(); g++) {
-					temp.add(line.charAt(g), null);
-				}
+				String t = sb.append(line).toString();
+				for (int g = 0; g < t.length(); g++)
+					temp.add(t.charAt(g), null);
 				arr.add(temp);
-				System.out.println(temp);
 				i++;
 				temp = null;
 			}
@@ -77,7 +76,7 @@ public class MyMatrix<T> implements Matrix<T> {
 	}
 
 	public void print() {
-		for (ArrayList a : arr) {
+		for (ArrayList<T> a : arr) {
 			System.out.println(a);
 		}
 	}
