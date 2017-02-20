@@ -73,7 +73,7 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	}
 
-	public String print() {
+	public String getMatrix() {
 		String res = "";
 		for (int i = 0; i < arr.size(); i++) {
 			for (int j = 0; j < arr.get(i).size(); j++) {
@@ -92,7 +92,7 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	public static void main(String[] args) {
 		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
-		System.out.println(m.print());
+		System.out.println(m.getMatrix());
 	}
 
 }
