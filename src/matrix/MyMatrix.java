@@ -13,7 +13,7 @@ public class MyMatrix<T> implements Matrix<T> {
 	int r, c, h, l;
 
 	public MyMatrix(String path) {
-		int i = 1;
+		int i = 0;
 		try {
 			File file = new File(path);
 			BufferedReader br = new BufferedReader(new FileReader(file));
@@ -23,13 +23,15 @@ public class MyMatrix<T> implements Matrix<T> {
 			this.c = Character.getNumericValue(lines.charAt(2));
 			this.l = Character.getNumericValue(lines.charAt(4));
 			this.h = Character.getNumericValue(lines.charAt(6));
+
 			while (br.ready() && i < arr.size()) {
 				String line = br.readLine();
 				ArrayList<T> temp = new ArrayList<>();
-				for (int g = 1; i < line.length(); i++) {
+				for (int g = 1; g < line.length(); g++) {
 					temp.add(line.charAt(g), null);
 				}
 				arr.add(temp);
+				System.out.println(temp);
 				i++;
 				temp = null;
 			}
@@ -89,7 +91,6 @@ public class MyMatrix<T> implements Matrix<T> {
 	public static void main(String[] args) {
 		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
 		m.print();
-
 	}
 
 }
