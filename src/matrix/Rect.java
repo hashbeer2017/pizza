@@ -12,23 +12,38 @@ public class Rect {
 	private static final int HORIZONTAL = 0;
 	private static final int VERTICAL = 1;
 
-	public Rect(int up, int left, int down, int right) {
-		this.upperLeft = new Coord(up, left);
-		this.downRight = new Coord(down, right);
+	public Rect(int rows, int cols) {
+		this.upperLeft = new Coord(0, 0);
+		this.downRight = new Coord(cols-1, rows-1);
 		this.lastSplitDirection = VERTICAL;
 	}
 	
-	private Rect(int up, int left, int down, int right, int verse) {
+	public Rect(int up, int left, int down, int right, int verse) {
 		this.upperLeft = new Coord(up, left);
 		this.downRight = new Coord(down, right);
 		this.lastSplitDirection = verse;
 	}
 
-	public boolean isLeaf() {
+	public int[] getUL(){
+		int res[] = {upperLeft.row, upperLeft.col};
+		return res;
+	}
+	
+	public int[] getDR(){
+		int res[] = {downRight.row, downRight.col};
+		return res;
+	}
+	
+	public Set<Rect> getSlices(int h){
+		//to do
+		return null;
+	}
+	
+	private boolean isLeaf() {
 		return this.children.isEmpty();
 	}
 	
-	public boolean isSplittable(int h){
+	private boolean isSplittable(int h){
 		int width = downRight.col - upperLeft.col;
 		int height = downRight.row - upperLeft.row;
 		return (width * height) >= h;
@@ -87,13 +102,38 @@ public class Rect {
 		return "UL: (" + upperLeft.row + "," + upperLeft.col + ") DR: (" + downRight.row + "," + downRight.col + ")";
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		Rect other = (Rect) obj;
+		return this.upperLeft.equals(other.upperLeft) && this.downRight.equals(other.downRight);
+	}
+	
+	@Override
+	public int hashCode() {
+		String s = "" + upperLeft.toString() + downRight.toString();
+		return Integer.parseInt(s);
+	}
+	
 	private class Coord {
 		int row;
 		int col;
 
-		public Coord(int x, int y) {
-			this.row = x;
-			this.col = y;
+		public Coord(int row, int col) {
+			this.row = row;
+			this.col = col;
 		}
+		
+		@Override
+		public String toString() {
+			return row + "" + col;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			Coord other = (Coord) obj;
+			return this.row == other.row && this.col == other.col;
+		}
+		
 	}
+	
 }
