@@ -23,7 +23,7 @@ public class MyMatrix<T> implements Matrix<T> {
 			this.l = Character.getNumericValue(lines.charAt(4));
 			this.h = Character.getNumericValue(lines.charAt(6));
 
-			while (br.ready() && i < getRows()) {
+			while (br.ready() && i < getNumRows()) {
 				String line = br.readLine();
 				ArrayList<T> temp = new ArrayList<T>();
 				for (int g = 0; g < line.length(); g++)
@@ -39,11 +39,11 @@ public class MyMatrix<T> implements Matrix<T> {
 		}
 	}
 
-	public int getCols() {
+	public int getNumCols() {
 		return this.c;
 	}
 
-	public int getRows() {
+	public int getNumRows() {
 		return this.r;
 	}
 
@@ -91,14 +91,19 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	public static void main(String[] args) {
 		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
-		System.out.println("Numero di righe: " + m.getRows());
-		System.out.println("Numero di colonne: " + m.getCols());
+		System.out.println("Numero di righe: " + m.getNumRows());
+		System.out.println("Numero di colonne: " + m.getNumCols());
 		System.out.println("L: " + m.getL());
 		System.out.println("H: " + m.getH());
 		System.out.println();
 		System.out.println("Matrice: ");
 		System.out.println();
 		System.out.println(m.getMatrix());
+	}
+
+	@Override
+	public ArrayList<T> getRow(int row) {
+		return arr.get(row);
 	}
 
 }
