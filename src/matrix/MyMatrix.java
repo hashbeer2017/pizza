@@ -57,11 +57,10 @@ public class MyMatrix<T> implements Matrix<T> {
 
 	@Override
 	public Iterator iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new MatrixIterator<T>(this);
 	}
 
-	private static class Cell<T> {
+	public static class Cell<T> {
 
 		T object;
 		// boolean taken;
@@ -90,7 +89,7 @@ public class MyMatrix<T> implements Matrix<T> {
 	}
 
 	public static void main(String[] args) {
-		MyMatrix<Cell> m = new MyMatrix<Cell>("small.in");
+		MyMatrix<Cell> m = new MyMatrix<Cell>("resource/small.in");
 		System.out.println("Numero di righe: " + m.getNumRows());
 		System.out.println("Numero di colonne: " + m.getNumCols());
 		System.out.println("L: " + m.getL());
