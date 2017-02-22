@@ -18,7 +18,7 @@ public class RectTest {
 	@Before
 	public void setUp() throws Exception {
 		 game = new MyMatrix("resources/small.in");
-		 rect = new Rect(game.getRows(), game.getCols());
+		 rect = new Rect(game.getNumRows(), game.getNumCols());
 	}
 
 	@After

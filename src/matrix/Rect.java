@@ -14,7 +14,7 @@ public class Rect {
 
 	public Rect(int rows, int cols) {
 		this.upperLeft = new Coord(0, 0);
-		this.downRight = new Coord(cols-1, rows-1);
+		this.downRight = new Coord(rows-1, cols-1);
 		this.lastSplitDirection = VERTICAL;
 	}
 	
@@ -34,8 +34,23 @@ public class Rect {
 		return res;
 	}
 	
+	public int getU() {
+		return upperLeft.row;
+	}
+	
+	public int getL() {
+		return upperLeft.col;
+	}
+	
+	public int getD() {
+		return downRight.row;
+	}
+	
+	public int getR() {
+		return downRight.col;
+	}
+	
 	public Set<Rect> getSlices(int h){
-		//to do
 		return null;
 	}
 	
@@ -44,9 +59,10 @@ public class Rect {
 	}
 	
 	private boolean isSplittable(int h){
-		int width = downRight.col - upperLeft.col;
-		int height = downRight.row - upperLeft.row;
-		return (width * height) >= h;
+		int width = (downRight.col - upperLeft.col) + 1;
+		int height = (downRight.row - upperLeft.row) + 1;
+		int res = width * height;
+		return res >= h;
 	}
 	
 	/**
@@ -58,34 +74,38 @@ public class Rect {
 	 * @param h
 	 */
 	private void treeGeneration(int h){
-		if (!isSplittable(h))
-			return;
-		
-		if (this.lastSplitDirection == HORIZONTAL) {
-			int end = downRight.col;
-			int start = upperLeft.col;
-			int mid = (end - start) / 2;
+		if (isSplittable(h)) {
+			if (this.lastSplitDirection == HORIZONTAL) {
+				int end = downRight.col;
+				int start = upperLeft.col;
+				int mid = (end - start) / 2;
+				
+				children.add(new Rect(upperLeft.row, upperLeft.col, downRight.row, downRight.col - mid - 1, VERTICAL));
+				children.add(new Rect(upperLeft.row, upperLeft.col + mid, downRight.row, downRight.col, VERTICAL));
+			} else {
+				int end = downRight.row;
+				int start = upperLeft.row;
+				int mid = (end - start) / 2;
+				
+				children.add(new Rect(upperLeft.row, upperLeft.col, downRight.row - mid, downRight.col, HORIZONTAL));
+				children.add(new Rect(upperLeft.row + mid, upperLeft.col, downRight.row, downRight.col, HORIZONTAL));
+			}
 			
-			children.add(new Rect(upperLeft.row, upperLeft.col, downRight.row, mid, VERTICAL));
-			children.add(new Rect(upperLeft.row, mid+1, downRight.row, downRight.col, VERTICAL));
-		} else {
-			int end = downRight.row;
-			int start = upperLeft.row;
-			int mid = (end - start) / 2;
-			
-			children.add(new Rect(upperLeft.row, upperLeft.col, mid, downRight.col, HORIZONTAL));
-			children.add(new Rect(mid+1, upperLeft.col, downRight.row, downRight.col, HORIZONTAL));
-		}
-		
-		for(Rect child : children){
-			child.treeGeneration(h);
+			for(Rect child : children){
+				child.treeGeneration(h);
+			}
 		}
 	}
 
+	
 	public Set<Rect> split(int h){
+		// Genera la struttura ricorsiva.
 		treeGeneration(h);
+		// Ritorna solo le foglie della struttura ricorsiva
 		return loop(this, new HashSet<Rect>());
 	}
+	
+	
 	
 	private Set<Rect> loop(Rect father, Set<Rect> partialResult){
 		for(Rect r : father.children){
