@@ -8,17 +8,15 @@ import matrix.Rect;
 public class Runner {
 
 	public static void main(String[] args) {
-		// Inizializzare la matrice
-		MyMatrix game = new MyMatrix("resources/small.in");
-
-		// Associare un rect alla matrice
-		Rect rect = new Rect(game.getNumRows(), game.getNumCols());
-
-		// Effettuare lo split, considerare solo i nodi foglia.
-
-		// Verificare se i nodi foglia vanno presi o vanno scartati
-
-		Set<Rect> set = rect.getSlices(game.getH());
+		// Params
+		String path = "resources/small.in";
+		int l = 2;
+		int h = 5;
+		
+		// Play
+		MyMatrix<Character> game = new MyMatrix<Character>(path);
+		SliceManager manager = new SliceManager(game);
+		Set<Rect> set = manager.cut(h, l);
 
 		// # of slices
 		System.out.println(set.size() + "slices.");

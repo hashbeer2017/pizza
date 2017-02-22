@@ -13,7 +13,7 @@ public class SliceManager {
 	private MyMatrix<Character> game;
 	private Rect rect;
 	
-	public SliceManager(MyMatrix<Character> game, Rect rect) {
+	public SliceManager(MyMatrix<Character> game) {
 		this.game = game;
 		this.rect = new Rect(game.getNumRows(), game.getNumCols());
 	}
