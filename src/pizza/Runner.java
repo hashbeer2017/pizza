@@ -3,7 +3,7 @@ package pizza;
 import java.util.Set;
 
 import matrix.MyMatrix;
-import matrix.Rect;
+import matrix.Slice;
 
 public class Runner {
 
@@ -16,13 +16,15 @@ public class Runner {
 		// Play
 		MyMatrix<Character> game = new MyMatrix<Character>(path);
 		SliceManager manager = new SliceManager(game);
-		Set<Rect> set = manager.cut(h, l);
+		Set<Slice> set = manager.cut(h, l);
 
 		// # of slices
-		System.out.println(set.size() + "slices.");
+		System.out.println(set.size() + " slices.");
 		// slices
-		for (Rect r : set) {
-			System.out.println("Slice between rows (" + r.getUL() + ") and columns (" + r.getDR() + ")");
+		for (Slice r : set) {
+			int[] ul = r.getUL();
+			int[] dr = r.getDR();
+			System.out.println("Slice between rows (" + ul[0] + ", " + ul[1] + ") and columns (" + dr[0] + ", " + dr[1] + ")");
 		}
 
 	}

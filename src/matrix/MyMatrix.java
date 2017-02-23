@@ -27,7 +27,7 @@ public class MyMatrix<T> implements Matrix<T> {
 				String line = br.readLine();
 				ArrayList<T> temp = new ArrayList<T>();
 				for (int g = 0; g < line.length(); g++)
-					temp.add((T) (line.charAt(g) + ""));
+					temp.add((T) ((Character)line.charAt(g)));
 				arr.add(temp);
 				i++;
 				temp = null;
